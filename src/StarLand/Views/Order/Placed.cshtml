@@ -1,0 +1,21 @@
+﻿@model OrderPlacedViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mt-2">
+            <div class="card">
+            </div>
+        </div>
+
+        <div class="col-md-4 mt-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" style="color:dodgerblue; text-align:center">Congratulations!</h5>
+                    <h5 class="card-title" style="color:dodgerblue; text-align:center">You are now the happy owner of @Model.Name</h5>
+
+                    <img src="~/uploads/@Model.Picture" class="card-img-bottom img-fluid" style="width:100%" alt="@Model.Picture">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

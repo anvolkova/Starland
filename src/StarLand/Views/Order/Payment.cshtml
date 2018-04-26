@@ -1,0 +1,63 @@
+﻿@model OrderPaymentViewModel
+
+<div class="col-md-4 mt-2">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title" style="color:dodgerblue;">You are going to buy:</h5>
+            <h6 class="card-text" style="color:dodgerblue;">Planet name: @Model.Name</h6>
+            <h6 class="card-text" style="color:dodgerblue;">Total Price: &#x24;@Model.TotalPrice m</h6>
+        </div>
+    </div>
+</div>
+
+<form class="form-signin" asp-controller="Order" asp-action="Payment" method="post" asp-anti-forgery="true">
+    <h4 class="form-signin-heading">We accept Credit Card payment only</h4>
+    <div>
+        <input asp-for="PlanetId" hidden />
+        <input asp-for="TotalPrice" hidden />
+        <input asp-for="Name" hidden />
+    </div>
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div class="form-group">
+        <label>Card number</label>
+        <input asp-for="CardNumber" class="form-control" required type="text" maxlength="19" pattern="[0-9]+" onkeyup="this.value = this.value.replace(/[^0-9]/, '')">
+        <span asp-validation-for="CardNumber"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Expires</label>
+        <select style="width:8ch; display:inline-block;" asp-for="Month" class="form-control">
+            @for (int i = 1; i <= 12; i++)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
+        <span asp-validation-for="Month"></span>
+        <select style="width:16ch; display:inline-block;" asp-for="Year" class="form-control">
+            @for (int i = 2000; i <= 2030; i++)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
+        <span asp-validation-for="Year"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Name on card</label>
+        <input asp-for="NameOnCard" class="form-control">
+        <span asp-validation-for="NameOnCard"></span>
+    </div>
+
+    <div class="form-group">
+        <label>CVV</label>
+        <input asp-for="CVV" class="form-control" style="width:8ch; display:inline-block;" required type="text" maxlength="3" pattern="[0-9]{3}" onkeyup="this.value = this.value.replace(/[^0-9]/, '')">
+        <span asp-validation-for="CVV"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Pay" />
+        <a class="btn btn-light" href="/Home/Index" role="button">Cancel</a>
+    </div>
+
+</form>

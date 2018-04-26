@@ -1,0 +1,42 @@
+﻿@model PlanetListViewModel
+
+<div class="container">
+    <div class="row">     
+        <div class="col-md-7 mt-3 mb-3">
+            <h5>Find your planet</h5>
+        </div>   
+        <div class="col-md-5 mt-3 mb-3">
+            <form asp-controller="Planet" asp-action="List" method="get">
+                <div class="input-group-sm">
+                    <span asp-for="MinPrice">Min Price</span>
+                    <input class="form-control-sm" style="width:10ch;" type="text" id="MinPrice" name="MinPrice" value="">
+                    <span asp-for="MaxPrice">Max Price</span>
+                    <input class="form-control-sm" style="width:10ch;" type="text" id="MaxPrice" name="MaxPrice" value="">
+                    <input type="submit" class="btn btn-lg btn-primary btn-sm mb-1" value="Search" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model.Planets)
+        {
+            <div class="col-md-4 mt-2">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h6 class="card-title">@item.Name</h6>
+                    </div>
+                    <div class="card-body">                      
+                        <img src="~/uploads/@item.Picture" class="card-img-bottom img-fluid" style="width:100%" alt="@item.Picture">
+                        <h6 class="card-text">Diameter (km): @item.Size</h6>
+                        <h6 class="card-text">Mean distance from Sun (<a href="https://en.wikipedia.org/wiki/Astronomical_unit">astronomical unit = AU</a>): @item.Distance</h6>
+                        <h6 class="card-text"><b>&#x24;@item.Price m</b></h6>
+                        <span class="btn btn-light float-sm-right mt-sm-1">@Html.ActionLink("Buy", "Payment", "Order", new { planetId = item.PlanetId })</span>                                                                       
+                    </div>                    
+                </div>
+            </div>
+        }
+    </div>
+</div>

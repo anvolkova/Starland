@@ -1,0 +1,18 @@
+﻿@model OrderCheckoutViewModel
+
+<h4 class="mb-2">You are going to buy:</h4>
+
+<div>
+    <h6>Planet name: @Model.Name</h6>
+</div>
+<div>
+    <h6>Total Price: &#x24;@Model.TotalPrice m</h6>
+</div>
+ <div>
+     <p>Please proceed to checkout</p>
+ </div>
+
+<div>
+    <a class="btn btn-primary mt-2 mb-2" href="/Order/Payment">Checkout</a>
+    <a class="btn btn-primary mt-2 mb-2 mr-1" href="/Home/Index">Cancel</a>
+</div>
